@@ -1,0 +1,14 @@
+run cd auto-company-db
+
+
+run pip install -r requirements.txt
+if an error shows up, install pip from google chrome, and restart VS Code
+
+
+run "python -m venv venv"
+if an error shows up, install python from google chrome, download the standalone installer, select the "add to PATH" option
+and the "administrator" check, and restart VS Code
+
+run venv\Scripts\activate
+
+

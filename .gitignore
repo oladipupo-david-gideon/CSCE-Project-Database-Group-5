@@ -1,0 +1,46 @@
+# ==========================================
+# CSCE 4350 Database Project .gitignore
+# ==========================================
+
+# Python Cache & Compiled Files
+# Prevents Python's compiled byte-code from cluttering the repo
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+# If anyone uses a local virtual environment, this keeps it out of GitHub
+venv/
+env/
+.venv/
+Scripts/
+Lib/
+
+# Environment Variables & Secrets
+# NEVER upload passwords or connection strings to GitHub!
+.env
+.env.local
+.secret
+
+# OS-Specific Junk Files
+# Prevents Mac and Windows from uploading hidden folder configuration files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# IDE & Editor Folders
+# Keeps everyone's personal VS Code or PyCharm settings local
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database Dumps & Logs
+# Prevents accidentally uploading massive database backup files or local logs
+*.log
+*.bak
+*.sql.gz
+*.dump
