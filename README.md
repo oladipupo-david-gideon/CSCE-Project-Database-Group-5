@@ -9,10 +9,10 @@
 
 | Name | Role | Folder | Responsibilities |
 | :--- | :--- | :--- | :--- |
-| **David Oladipupo** | Integration & Marketing Lead | `src/marketing/` | Repo setup, master DB connection script, Master Login Menu, Marketing OLAP CLI |
-| **Shegofa Ahmadi** | Customer Interface Developer | `src/customer/` | Online Customer CLI — inventory search & mock purchases |
-| **Snehitha Paruchi** | Dealer Interface Developer | `src/dealer/` | Vehicle Locator CLI — local/global stock & sales processing |
-| **Ronitkumar Sabhaya** | Project Manager & DBA | `sql/` | DB management, DBA CLI Menu, complex defect/inventory queries, `.env` configuration, checkpoint submissions |
+| **David Oladipupo** | Integration & Marketing Lead | `src/marketing/` & `sql/` | Repo setup, master DB connection script, Master Login Menu, Marketing OLAP CLI, complex defect/inventory queries, `.env` configuration |
+| **Shegofa Ahmadi** | Customer Interface Developer | `src/customer/` | Online Customer CLI — inventory search & mock purchases, Project Presenation |
+| **Snehitha Paruchi** | Dealer Interface Developer | `src/dealer/` | Vehicle Locator CLI — local/global stock & sales processing, Project Presenation|
+| **Ronitkumar Sabhaya** | Project Manager & DBA | `src/dba` & `auto-company-db/tests` | DB management, DBA CLI Menu, unit tests & configuration, checkpoint submissions |
 
 ---
 
@@ -33,6 +33,7 @@ DB_NAME=postgres
 DB_USER=postgres.yhatilhoqfnmmyictnyz
 DB_PASS=your_actual_password_here
 ```
+Or the `.env` file will come with the zip submitted to Canvas
 
 ### 3. Run the Application
 ```bash
@@ -59,7 +60,7 @@ python main.py
 | Date | Phase | Task | Assignee |
 | :--- | :--- | :--- | :--- |
 | Apr 18–19 | Architecture | Convert all menu code to standardized OOP class structure | Entire Team |
-| Apr 20–24 | SQL Implementation | Add active SQL execution to Python class methods (replace print placeholders) | Snehitha & Shegofa |
+| Apr 20–24 | SQL Implementation | Add active SQL execution to Python class methods (replace print placeholders) | Entire Team |
 | Apr 25–27 | Integration | Test Supabase connection pooler; verify concurrent DB transactions | David & Entire Team |
 
 ### Phase 3 — Final Delivery
@@ -67,8 +68,8 @@ python main.py
 | Date | Phase | Task | Assignee |
 | :--- | :--- | :--- | :--- |
 | Apr 26–29 | Bug Squashing | Fix broken queries, update E-R diagram, final tests | Entire Team |
-| Apr 27–29 | Presentation Prep | Create project slides (Canva/PowerPoint) | Ronitkumar Sabhaya |
-| **Apr 30** | **Checkpoint 3 / Final Delivery** | **Submit `Project-Team5.zip` and presentation to Blackboard** | **Ronitkumar Sabhaya** |
+| Apr 27–29 | Presentation Prep | Create project slides (Canva/PowerPoint) | Snehitha Paruchi |
+| **Apr 30** | **Checkpoint 3 / Final Delivery** | **Submit `Project-Team5.zip` and presentation to Canvas** | **Ronitkumar Sabhaya** |
 
 ---
 
