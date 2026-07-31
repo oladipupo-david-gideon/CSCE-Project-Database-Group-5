@@ -11,6 +11,26 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: auto_company_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v3
@@ -25,14 +45,58 @@ jobs:
         cd auto-company-db/src
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pytest
+        pip install pytest pytest-html
 
     - name: Run Unit Tests
       run: |
         cd auto-company-db
-        python -m unittest discover -s tests -p "test_unit*.py" -v
+        pytest tests/test_unit_*.py -v --junitxml=unit-test-results.xml --html=unit-report.html --self-contained-html
+
+    - name: Initialize Database
+      env:
+        PGPASSWORD: testpassword
+      run: |
+        psql -h localhost -U postgres -d auto_company_db -f auto-company-db/sql/schema.sql
+        psql -h localhost -U postgres -d auto_company_db -f auto-company-db/sql/dummy_data.sql
 
     - name: Run Integration Tests
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_NAME: auto_company_db
+        DB_USER: postgres
+        DB_PASSWORD: testpassword
       run: |
         cd auto-company-db
-        python -m unittest discover -s tests -p "test_integration*.py" -v
+        pytest tests/test_integration*.py -v --junitxml=integration-test-results.xml --html=integration-report.html --self-contained-html
+
+    - name: Run E2E Tests
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_NAME: auto_company_db
+        DB_USER: postgres
+        DB_PASSWORD: testpassword
+        DB_PASS: testpassword
+      run: |
+        cd auto-company-db
+        pytest tests/test_e2e*.py -v --junitxml=e2e-test-results.xml --html=e2e-report.html --self-contained-html
+
+    - name: Publish Test Results to PR
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          auto-company-db/unit-test-results.xml
+          auto-company-db/integration-test-results.xml
+          auto-company-db/e2e-test-results.xml
+
+    - name: Upload Test Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-reports
+        path: |
+          auto-company-db/unit-report.html
+          auto-company-db/integration-report.html
+          auto-company-db/e2e-report.html
